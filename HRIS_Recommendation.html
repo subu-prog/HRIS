@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enterprise HRIS Architecture & Implementation - Course Proposal</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            border-radius: 12px;
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+        
+        .header .subtitle {
+            font-size: 1.3em;
+            opacity: 0.95;
+            font-weight: 300;
+        }
+        
+        .badge {
+            display: inline-block;
+            background: rgba(255,255,255,0.2);
+            padding: 8px 20px;
+            border-radius: 20px;
+            margin: 15px 5px 0;
+            font-size: 0.9em;
+            backdrop-filter: blur(10px);
+        }
+        
+        .content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            padding: 40px;
+        }
+        
+        .section {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 8px;
+            border-left: 4px solid #667eea;
+        }
+        
+        .section h2 {
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 1.4em;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .icon {
+            width: 30px;
+            height: 30px;
+            background: #667eea;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 1.1em;
+        }
+        
+        .full-width {
+            grid-column: 1 / -1;
+        }
+        
+        .timeline {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 10px;
+            margin-top: 15px;
+        }
+        
+        .day-card {
+            background: white;
+            padding: 15px;
+            border-radius: 6px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            transition: transform 0.2s;
+        }
+        
+        .day-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 12px rgba(102,126,234,0.3);
+        }
+        
+        .day-number {
+            background: #667eea;
+            color: white;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+        
+        .day-title {
+            font-weight: 600;
+            font-size: 0.85em;
+            color: #333;
+            margin-bottom: 5px;
+        }
+        
+        .day-desc {
+            font-size: 0.75em;
+            color: #666;
+        }
+        
+        .features {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-top: 15px;
+        }
+        
+        .feature-box {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        .feature-box .number {
+            font-size: 2.5em;
+            font-weight: bold;
+            color: #667eea;
+            margin-bottom: 5px;
+        }
+        
+        .feature-box .label {
+            font-size: 0.9em;
+            color: #666;
+        }
+        
+        .highlight-box {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 8px;
+            text-align: center;
+        }
+        
+        .highlight-box h3 {
+            font-size: 1.8em;
+            margin-bottom: 15px;
+        }
+        
+        .highlight-box p {
+            font-size: 1.1em;
+            opacity: 0.95;
+        }
+        
+        ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        
+        ul li {
+            padding: 8px 0;
+            padding-left: 25px;
+            position: relative;
+        }
+        
+        ul li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #667eea;
+            font-weight: bold;
+            font-size: 1.2em;
+        }
+        
+        .assessment-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 10px;
+            margin-top: 10px;
+        }
+        
+        .assessment-item {
+            background: white;
+            padding: 12px;
+            border-radius: 6px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .percentage {
+            background: #667eea;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+        }
+        
+        .footer {
+            background: #2d3748;
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            padding: 15px 40px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            margin-top: 15px;
+            transition: transform 0.2s;
+        }
+        
+        .cta-button:hover {
+            transform: scale(1.05);
+            background: #764ba2;
+        }
+        
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+            }
+            .container {
+                box-shadow: none;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .content {
+                grid-template-columns: 1fr;
+            }
+            .timeline {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .features {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🎓 Enterprise HRIS Architecture & Implementation</h1>
+            <p class="subtitle">2-Week Immersive Course with Real-World Simulation Game</p>
+            <div>
+                <span class="badge">40 Hours</span>
+                <span class="badge">Postgraduate Level</span>
+                <span class="badge">Vendor-Neutral</span>
+                <span class="badge">Hands-On</span>
+            </div>
+        </div>
+        
+        <div class="content">
+            <div class="section full-width">
+                <h2><span class="icon">🎯</span>Course Overview</h2>
+                <p><strong>Transform technical talent into enterprise HRIS architects.</strong> This intensive program equips postgraduate students (MBA, MS, MTech, MCA) with comprehensive expertise in Human Resource Information Systems through vendor-neutral instruction aligned with industry leaders (Workday, SAP SuccessFactors, Oracle HCM Cloud, UKG, ADP).</p>
+            </div>
+            
+            <div class="section">
+                <h2><span class="icon">💡</span>Unique Value Proposition</h2>
+                <ul>
+                    <li><strong>Systems Architecture Focus:</strong> Not click-training—design thinking</li>
+                    <li><strong>Continuous Simulation:</strong> Act as HRIS consultants for growing enterprise</li>
+                    <li><strong>Real-World Challenges:</strong> Acquisitions, audits, budget cuts, data breaches</li>
+                    <li><strong>Rotating Roles:</strong> Experience all consulting perspectives</li>
+                    <li><strong>Portfolio Outcome:</strong> Production-ready architecture artifacts</li>
+                </ul>
+            </div>
+            
+            <div class="section">
+                <h2><span class="icon">🎮</span>Simulation Game</h2>
+                <p><strong>"GlobalTech HRMS Transformation"</strong></p>
+                <p>Teams consult for a tech company scaling from 500 to 5,000 employees across 15 countries. Navigate:</p>
+                <ul>
+                    <li>Acquisition integrations</li>
+                    <li>Regulatory compliance changes</li>
+                    <li>Performance system overhauls</li>
+                    <li>Security incidents</li>
+                    <li>Budget constraints</li>
+                </ul>
+            </div>
+            
+            <div class="section full-width">
+                <h2><span class="icon">📅</span>10-Day Curriculum Journey</h2>
+                <div class="timeline">
+                    <div class="day-card">
+                        <div class="day-number">1</div>
+                        <div class="day-title">Foundations</div>
+                        <div class="day-desc">System of Record, Architecture Vision</div>
+                    </div>
+                    <div class="day-card">
+                        <div class="day-number">2</div>
+                        <div class="day-title">Data Models</div>
+                        <div class="day-desc">ERDs, Org Design, Job Architecture</div>
+                    </div>
+                    <div class="day-card">
+                        <div class="day-number">3</div>
+                        <div class="day-title">Recruiting</div>
+                        <div class="day-desc">ATS, Onboarding Workflows</div>
+                    </div>
+                    <div class="day-card">
+                        <div class="day-number">4</div>
+                        <div class="day-title">Time & Labor</div>
+                        <div class="day-desc">Attendance, WFM, Compliance</div>
+                    </div>
+                    <div class="day-card">
+                        <div class="day-number">5</div>
+                        <div class="day-title">Payroll</div>
+                        <div class="day-desc">Integration, Benefits, Security</div>
+                    </div>
+                    <div class="day-card">
+                        <div class="day-number">6</div>
+                        <div class="day-title">Performance</div>
+                        <div class="day-desc">Goals, 360-Feedback, OKRs</div>
+                    </div>
+                    <div class="day-card">
+                        <div class="day-number">7</div>
+                        <div class="day-title">Talent</div>
+                        <div class="day-desc">Learning, Skills, Succession</div>
+                    </div>
+                    <div class="day-card">
+                        <div class="day-number">8</div>
+                        <div class="day-title">Compensation</div>
+                        <div class="day-desc">Merit, Equity, Pay Analytics</div>
+                    </div>
+                    <div class="day-card">
+                        <div class="day-number">9</div>
+                        <div class="day-title">Security</div>
+                        <div class="day-desc">RBAC, GDPR, Compliance, Audit</div>
+                    </div>
+                    <div class="day-card">
+                        <div class="day-number">10</div>
+                        <div class="day-title">Capstone</div>
+                        <div class="day-desc">APIs, Analytics, Executive Presentation</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="section">
+                <h2><span class="icon">📊</span>Key Metrics</h2>
+                <div class="features">
+                    <div class="feature-box">
+                        <div class="number">13+</div>
+                        <div class="label">HRMS Modules</div>
+                    </div>
+                    <div class="feature-box">
+                        <div class="number">10</div>
+                        <div class="label">Sprint Deliverables</div>
+                    </div>
+                    <div class="feature-box">
+                        <div class="number">6</div>
+                        <div class="label">Event Card Challenges</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="section">
+                <h2><span class="icon">✅</span>Assessment Structure</h2>
+                <div class="assessment-grid">
+                    <div class="assessment-item">
+                        <span>Daily Sprint Deliverables</span>
+                        <span class="percentage">40%</span>
+                    </div>
+                    <div class="assessment-item">
+                        <span>Cumulative Portfolio</span>
+                        <span class="percentage">25%</span>
+                    </div>
+                    <div class="assessment-item">
+                        <span>Executive Presentation</span>
+                        <span class="percentage">20%</span>
+                    </div>
+                    <div class="assessment-item">
+                        <span>Peer Collaboration</span>
+                        <span class="percentage">10%</span>
+                    </div>
+                    <div class="assessment-item">
+                        <span>Reflection Paper</span>
+                        <span class="percentage">5%</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="section full-width highlight-box">
+                <h3>🚀 Career Impact</h3>
+                <p>Graduates are ready for immediate contribution as <strong>HRIS Consultants</strong> (Big 4, Accenture, Deloitte), <strong>In-house HRIS Architects</strong>, <strong>Product Managers</strong> at HR tech vendors, <strong>People Analytics Professionals</strong>, and <strong>HR Transformation Leaders</strong>.</p>
+            </div>
+            
+            <div class="section">
+                <h2><span class="icon">🛠️</span>Tools & Technology</h2>
+                <p><strong>100% Free/Academic-Friendly:</strong></p>
+                <ul>
+                    <li>Draw.io, Lucidchart (Diagramming)</li>
+                    <li>dbdiagram.io (Data Modeling)</li>
+                    <li>Figma (Wireframing)</li>
+                    <li>Tableau Public, Power BI (Analytics)</li>
+                    <li>Swagger Editor (API Specs)</li>
+                    <li>Google Workspace (Collaboration)</li>
+                </ul>
+            </div>
+            
+            <div class="section">
+                <h2><span class="icon">🎓</span>Learning Outcomes</h2>
+                <ul>
+                    <li>Design comprehensive HRMS data models</li>
+                    <li>Architect integration patterns & APIs</li>
+                    <li>Implement RBAC & compliance frameworks</li>
+                    <li>Build people analytics dashboards</li>
+                    <li>Present to executive stakeholders</li>
+                    <li>Manage multi-stakeholder projects</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <h3>🌟 This is not just a course—it's a launchpad for HRIS careers.</h3>
+            <p style="margin-top: 15px; font-size: 1.1em;">Combining academic rigor with experiential learning, producing graduates ready to lead HRMS transformations in the AI-driven, data-intensive future of work.</p>
+            <a href="#" class="cta-button">Request Full Proposal →</a>
+        </div>
+    </div>
+</body>
+</html>
