@@ -238,21 +238,47 @@
             text-align: center;
         }
         
+        .button-group {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+        
         .cta-button {
-            display: inline-block;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
             background: #667eea;
             color: white;
-            padding: 15px 40px;
+            padding: 15px 35px;
             border-radius: 30px;
             text-decoration: none;
             font-weight: bold;
-            margin-top: 15px;
-            transition: transform 0.2s;
+            font-size: 1.1em;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(102,126,234,0.4);
         }
         
         .cta-button:hover {
-            transform: scale(1.05);
+            transform: translateY(-2px);
             background: #764ba2;
+            box-shadow: 0 6px 20px rgba(118,75,162,0.5);
+        }
+        
+        .cta-button.secondary {
+            background: transparent;
+            border: 2px solid white;
+        }
+        
+        .cta-button.secondary:hover {
+            background: rgba(255,255,255,0.1);
+            transform: translateY(-2px);
+        }
+        
+        .download-icon {
+            font-size: 1.3em;
         }
         
         @media print {
@@ -274,6 +300,14 @@
             }
             .features {
                 grid-template-columns: 1fr;
+            }
+            .button-group {
+                flex-direction: column;
+                align-items: center;
+            }
+            .cta-button {
+                width: 100%;
+                max-width: 300px;
             }
         }
     </style>
@@ -453,9 +487,28 @@
         </div>
         
         <div class="footer">
-            <h3>🌟 This is not just a course—it's a launchpad for HRIS careers.</h3>
-            <p style="margin-top: 15px; font-size: 1.1em;">Combining academic rigor with experiential learning, producing graduates ready to lead HRMS transformations in the AI-driven, data-intensive future of work.</p>
-            <a href="#" class="cta-button">Request Full Proposal →</a>
+            <h3>🌟 Ready to Dive Deeper?</h3>
+            <p style="margin-top: 15px; font-size: 1.1em;">Download the comprehensive course proposal with detailed day-by-day breakdown, simulation game mechanics, assessment rubrics, and implementation guidelines.</p>
+            
+            <div class="button-group">
+                <a href="https://raw.githubusercontent.com/subu-prog/HRIS/main/HRIS_Detailed%20Instructions.pdf" 
+                   class="cta-button" 
+                   download="HRIS_Course_Full_Proposal.pdf">
+                    <span class="download-icon">📥</span>
+                    Download Full Proposal (PDF)
+                </a>
+                
+                <a href="https://github.com/subu-prog/HRIS/blob/main/HRIS_Detailed%20Instructions.pdf" 
+                   class="cta-button secondary" 
+                   target="_blank">
+                    <span class="download-icon">👁️</span>
+                    View on GitHub
+                </a>
+            </div>
+            
+            <p style="margin-top: 25px; font-size: 0.9em; opacity: 0.8;">
+                📄 Comprehensive 25+ page proposal | 📊 Complete curriculum design | 🎮 Full simulation mechanics
+            </p>
         </div>
     </div>
 </body>
